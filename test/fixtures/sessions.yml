@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  auth_token: MyString
+  credential_id: 1
+  session_type: 1
+  last_accessed_at: 2013-03-31 16:34:45
+  expired: false
+
+two:
+  auth_token: MyString
+  credential_id: 1
+  session_type: 1
+  last_accessed_at: 2013-03-31 16:34:45
+  expired: false

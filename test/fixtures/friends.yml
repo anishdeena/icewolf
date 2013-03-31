@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  provider_type: 1
+  credential_id: 1
+  unique_id: MyString
+
+two:
+  name: MyString
+  provider_type: 1
+  credential_id: 1
+  unique_id: MyString

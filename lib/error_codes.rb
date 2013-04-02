@@ -5,5 +5,6 @@ module ErrorCodes
   #member
   MEMBER_NOT_UNIQUE = '2000'
   #credential
-  CREDENTIAL_NOT_UNIQUE = '3000'  
+  CREDENTIAL_NOT_UNIQUE = '3000'
+  CREDENTIAL_NOT_FOUND = '3001'  
 end

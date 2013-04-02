@@ -1,6 +1,12 @@
 Icewolf::Application.routes.draw do
   #get "app/loader"
 
+  match "session" => "session#signIn", via: :post
+  match "session" => "session#signOut", via: :get
+  
+  match "user/:id" => "user#getUser", via: :get
+  match "me" => "user#getMe", via: :get
+  match "me" => "user#createUser", via: :post
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -8,7 +8,7 @@ module AppConstants
   
   #Session managment
   TOKEN_EXPIRY_IN_HOURS = 24
-  AUTH_TOKEN_HEADER_NAME = "fp-auth-token"
+  AUTH_TOKEN_HEADER_NAME = "icewolf-auth-token"
   
   #Location
   LOCATION_ANYLOCATION = -1

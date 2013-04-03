@@ -3,15 +3,16 @@ class ApplicationController < ActionController::Base
   require 'app_constants.rb'
   require 'error_codes.rb'
   require 'app_exception.rb'
+  before_filter :authenticate
   protect_from_forgery
 
   def authenticate
     auth_failed = true
     begin
-      fp_auth_token = getAuthToken()
+      auth_token = getAuthToken()
       
-      if(fp_auth_token)
-        user_session = UserSession.getUserSessionDetails(fp_auth_token)
+      if(auth_token)
+        user_session = Session.getUserSessionDetails(auth_token)
         logger.debug user_session.inspect
         if(user_session)
           last_logged = user_session.last_accessed_at 
@@ -19,10 +20,10 @@ class ApplicationController < ActionController::Base
           last_logged = last_logged + AppConstants::TOKEN_EXPIRY_IN_HOURS.hours
           logger.debug last_logged
           if(last_logged > DateTime.now)
-            UserSession.updateLastLoggedIn(user_session)
+            Session.updateLastLoggedIn(user_session)
             auth_failed = false
           else
-            UserSession.expireSessionBySession(user_session)
+            Session.expireSessionBySession(user_session)
           end    
         end      
       end  
@@ -40,8 +41,8 @@ class ApplicationController < ActionController::Base
   end
   
   def getCurrentUserInfo
-    fp_auth_token = getAuthToken()
-    user = UserSession.getCurrentUserInfo(fp_auth_token)
+    auth_token = getAuthToken()
+    user = Session.getCurrentUserInfo(auth_token)
     return user
   end
   

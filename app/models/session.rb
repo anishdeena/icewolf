@@ -22,22 +22,20 @@ class Session < ActiveRecord::Base
     return usersession
   end
   
-  def self.getUserSessionDetails(fp_auth_token)
-    session = self.find_by_auth_token_and_expired(fp_auth_token, false)
+  def self.getUserSessionDetails(auth_token)
+    session = self.find_by_auth_token_and_expired(auth_token, false)
     if(session)
-      Credential.getMemberCredentialDetails(session.credential_id)
+      Credential.getCredentialDetails(session.credential_id)
     end
     return session
   end
   
-  def self.getCurrentUserInfo(fp_auth_token)
-    user = []
-    user_session = getUserSessionDetails(fp_auth_token)
-    member = MemberInfo.getMemberInfoDetails(user_session.credential_id)
-    logger.debug member.credential.inspect
-    location = Location.getLocation(member.location_id)
-    circle_user = CircleUser.getCircleDetails(user_session.credential.id)
-    user.push({ usersession: user_session, member: member, credential: member.credential, circleuser: circle_user, circle: circle_user[0].circle , city: location })
+  def self.getCurrentUserInfo(auth_token)
+    #user = []
+    user_session = getUserSessionDetails(auth_token)
+    user = User.getUserInfoDetails(user_session.credential_id)
+    logger.debug user.credential.inspect
+    #user.push({ usersession: user_session, member: member, credential: member.credential, circleuser: circle_user, circle: circle_user[0].circle , city: location })
     return user
   end
   

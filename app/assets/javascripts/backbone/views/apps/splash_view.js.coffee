@@ -4,7 +4,7 @@ class Icewolf.Views.Apps.SplashView extends Backbone.View
   template: JST["backbone/templates/apps/splash"]
 
   events :
-    "click #fbConnectBtn"       : "fbconnect"
+    "click #fbConnectBtn"       : "fbconnect_test_stub"
   
   constructor: (options) ->
     super(options)
@@ -26,7 +26,9 @@ class Icewolf.Views.Apps.SplashView extends Backbone.View
             #alert("cancelled!")
             msg = 'You have cancelled Facebook Login. Kindly login to enter!'
     )
-
+    
+  fbconnect_test_stub: () ->
+    @signIn('100004133943578')
     
   signIn: (userID) ->
     that = this

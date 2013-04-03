@@ -21,17 +21,23 @@ class UserController < ApplicationController
     userId = params[:id]
     current_user = getCurrentUserInfo()
     current_user_cred_id = getCredentialId(current_user)
-    profileInformation = MemberInfo.getAllProfileInformation(userId)
-    if(profileInformation)
-      if current_user_cred_id != userId
-        UserStat.addStatsForView(current_user_cred_id, userId)
-      end
-    end
+    profileInformation = User.getAllProfileInformation(userId)
     respond_to do |format|
       if profileInformation
         format.json { render json: profileInformation , status: :ok}
       else
         format.json { render json: :no_content , status: :not_found } 
+      end
+    end
+  end
+  
+  def getMe
+    me = getCurrentUserInfo()
+    respond_to do |format|
+      if me
+        format.json { render json: me, status: :accepted }
+      else
+        format.json { render json: me, status: :not_found }
       end
     end
   end

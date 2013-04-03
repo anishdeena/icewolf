@@ -11,4 +11,21 @@ class User < ActiveRecord::Base
     user.avatar_url = 'http://graph.facebook.com/' + member["id"].to_s + '/picture'
     user.save!
   end
+  
+  def self.getAllProfileInformation(credential_id)
+    user_info = self.getUserInfoDetails(credential_id)
+    return user_info
+  end
+  
+  def self.getUserInfoDetails(credential_id)
+    user = nil
+    user_info = self.includes(:credential).joins(:credential).where(:credential_id => credential_id, 
+        :credentials => {:account_type => [DatabaseConstants::CREDENTIAL_ACTIVE_ACCOUNTTYPES, DatabaseConstants::CREDENTIAL_ACTIVE_INVITE_ACCOUNTTYPES]})
+    if(user_info.length != 0)
+       user = user_info[0]
+    end
+    return user
+  end
+  
+  
 end

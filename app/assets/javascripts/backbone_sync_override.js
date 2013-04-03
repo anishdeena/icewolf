@@ -5,7 +5,7 @@
      //console.log(request);
      if(response.statusText == 'Accepted' && request.url != "/session") {
        //alert('hi')
-       cookie.updateExpiry("fp-auth-token", 1)
+       cookie.updateExpiry(appConstants.COOKIE_NAME, 1)
      }
   });
 
@@ -52,8 +52,8 @@
           if (token) xhr.setRequestHeader('X-CSRF-Token', token);  
         }
         if (!options.noAuthToken) {
-          var authToken = getCookie("fp-auth-token");
-          if (authToken) xhr.setRequestHeader('fp-auth-token', authToken);  
+          var authToken = getCookie(appConstants.COOKIE_NAME);
+          if (authToken) xhr.setRequestHeader(appConstants.COOKIE_NAME, authToken);  
         }
         model.trigger('sync:start');
       }

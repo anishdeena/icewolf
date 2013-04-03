@@ -1,4 +1,5 @@
 class SessionController < ApplicationController
+  skip_before_filter :authenticate, only: [:signIn]
   
   def signIn
     fbuid = params[:session][:fbuid]

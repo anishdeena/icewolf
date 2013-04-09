@@ -7,6 +7,8 @@ Icewolf::Application.routes.draw do
   match "user/:id" => "user#getUser", via: :get
   match "me" => "user#getMe", via: :get
   match "me" => "user#createUser", via: :post
+  
+  match "friends" => "friend#getAllFBFriends", via: :get
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,7 @@
+<div class="span2" style="margin-left: 15px; margin-bottom: 15px;">
+  <div class="tile">
+    <img class="tile-image" style="margin-top: 0px; margin-bottom: 10px; height: 75px;" alt="" src="http://graph.facebook.com/<%= friend.attributes.unique_id %>/picture" style="margin-top: 10px;">
+    <p style="height: 40px; margin-bottom:10px;"><%= friend.attributes.name %></p>
+    <button class="btn btn-primary btn-block followBtn" fbuid="<%= friend.attributes.unique_id %>">Follow</a>
+  </div>
+</div>

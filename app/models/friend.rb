@@ -12,6 +12,13 @@ class Friend < ActiveRecord::Base
         friend.name = fbfriend["name"]
         friend.provider_type = DatabaseConstants::SOCIALCONTACT_PROVIDERTYPE_FACEBOOK
         friend.save!
+        credential = Credential.find_by_fbuid(friend.unique_id)
+        if credential
+          follow = Follow.new
+          follow.follower = friend.credential_id
+          follow.followee = credential.id
+          follow.save!
+        end
       end  
     end  
   end

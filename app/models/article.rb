@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
-  attr_accessible :credential_id, :deleted, :description, :image_url, :title, :url
+  attr_accessible :deleted, :description, :image_url, :title, :url, :tags
   
-  belongs_to :credential
+  has_many :bookmarks
+  has_many :article_stats
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402083913) do
+ActiveRecord::Schema.define(:version => 20130501115838) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "provider_type"
@@ -21,13 +21,33 @@ ActiveRecord::Schema.define(:version => 20130402083913) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "article_stats", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "count_bookmark"
+    t.integer  "upvote"
+    t.integer  "downvote"
+    t.integer  "count_view"
+    t.integer  "count_comment"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "articles", :force => true do |t|
     t.text     "title"
     t.text     "description"
     t.text     "url"
     t.text     "image_url"
     t.boolean  "deleted"
+    t.text     "tags"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "bookmarks", :force => true do |t|
     t.integer  "credential_id"
+    t.integer  "article_id"
+    t.text     "comment"
+    t.text     "tags"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -41,6 +61,13 @@ ActiveRecord::Schema.define(:version => 20130402083913) do
     t.string   "fbuid"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "follows", :force => true do |t|
+    t.integer  "follower"
+    t.integer  "followee"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "friends", :force => true do |t|

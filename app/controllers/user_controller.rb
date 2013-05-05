@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+skip_before_filter :authenticate, only: [:createUser]
 
   def createUser
     user = params[:user][:me]

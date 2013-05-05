@@ -6,7 +6,7 @@ class CreateArticles < ActiveRecord::Migration
       t.text :url
       t.text :image_url
       t.boolean :deleted
-      t.integer :credential_id
+      t.text :tags
 
       t.timestamps
     end

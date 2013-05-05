@@ -4,7 +4,7 @@ class Icewolf.Views.Apps.SplashView extends Backbone.View
   template: JST["backbone/templates/apps/splash"]
 
   events :
-    "click #fbConnectBtn"       : "fbconnect_test_stub"
+    "click #fbConnectBtn"       : "fbconnect"
   
   constructor: (options) ->
     super(options)

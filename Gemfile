@@ -13,6 +13,8 @@ gem 'rails-backbone'
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
+gem 'opengraph'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

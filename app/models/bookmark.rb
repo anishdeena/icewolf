@@ -24,13 +24,17 @@ class Bookmark < ActiveRecord::Base
         bookmark.save!
         return bookmark         
       else
+        og = OpenGraph.fetch(article["url"])
         new_article = Article.new
-        new_article.url = article["url"]
-        new_article.title = article["title"]
-        new_article.description = article["description"]
-        #if article["tags"]
-          #new_article.tags = article["tags"]
-        #end
+        if og
+          new_article.url = og.url
+          new_article.title = og.title
+          new_article.description = og.description
+          new_article.image_url = og.image
+        else
+          new_article.url = article["url"]
+        end
+        
         new_article.save!
         article_stats = ArticleStats.new
         article_stats.article_id = new_article.id

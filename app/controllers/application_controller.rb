@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   require 'app_constants.rb'
   require 'error_codes.rb'
   require 'app_exception.rb'
+  require 'opengraph'
+  
   before_filter :authenticate
   protect_from_forgery
 
@@ -51,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
   
   def getCredentialId(user)
-    return user[0][:member].credential_id
+    return user.credential_id
   end
   
   def handleStandardError(exception)

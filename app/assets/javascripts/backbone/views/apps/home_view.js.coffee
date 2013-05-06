@@ -9,6 +9,7 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
     @user = new Icewolf.Models.User()
     @cookie = new Cookie()
     @errors = new Errors()
+    
 
   render: ->
     @user.fetch(

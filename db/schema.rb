@@ -23,13 +23,13 @@ ActiveRecord::Schema.define(:version => 20130501115838) do
 
   create_table "article_stats", :force => true do |t|
     t.integer  "article_id"
-    t.integer  "count_bookmark"
-    t.integer  "upvote"
-    t.integer  "downvote"
-    t.integer  "count_view"
-    t.integer  "count_comment"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "count_bookmark", :default => 0
+    t.integer  "upvote",         :default => 0
+    t.integer  "downvote",       :default => 0
+    t.integer  "count_view",     :default => 0
+    t.integer  "count_comment",  :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "articles", :force => true do |t|

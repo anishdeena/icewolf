@@ -50,6 +50,10 @@ class ApplicationController < ActionController::Base
     return request.headers[AppConstants::AUTH_TOKEN_HEADER_NAME]
   end
   
+  def getCredentialId(user)
+    return user[0][:member].credential_id
+  end
+  
   def handleStandardError(exception)
     message = "Some Problem in server"
     status_code = :internal_server_error

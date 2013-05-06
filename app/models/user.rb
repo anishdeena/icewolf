@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   def self.getUserInfoDetails(credential_id)
     user = nil
     user_info = self.includes(:credential).joins(:credential).where(:credential_id => credential_id, 
-        :credentials => {:account_type => [DatabaseConstants::CREDENTIAL_ACTIVE_ACCOUNTTYPES, DatabaseConstants::CREDENTIAL_ACTIVE_INVITE_ACCOUNTTYPES]})
+        :credentials => {:account_type => [DatabaseConstants::CREDENTIAL_ACTIVE_ACCOUNTTYPES]})
     if(user_info.length != 0)
        user = user_info[0]
     end

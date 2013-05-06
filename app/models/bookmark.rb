@@ -25,6 +25,8 @@ class Bookmark < ActiveRecord::Base
         return bookmark         
       else
         og = OpenGraph.fetch(article["url"])
+        doc = Nokogiri::HTML(open(article["url"]))
+        keyword_tags = doc.at_css('meta[name="keywords"]').attributes["content"].value
         new_article = Article.new
         if og
           new_article.url = og.url
@@ -34,7 +36,9 @@ class Bookmark < ActiveRecord::Base
         else
           new_article.url = article["url"]
         end
-        
+        if keyword_tags
+          new_article.tags = keyword_tags
+        end 
         new_article.save!
         article_stats = ArticleStats.new
         article_stats.article_id = new_article.id

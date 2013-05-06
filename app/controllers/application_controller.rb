@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   require 'app_constants.rb'
   require 'error_codes.rb'
   require 'app_exception.rb'
+  require 'nokogiri'
+  require 'open-uri'
   require 'opengraph'
   
   before_filter :authenticate

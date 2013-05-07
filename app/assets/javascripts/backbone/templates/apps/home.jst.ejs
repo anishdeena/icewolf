@@ -9,30 +9,25 @@
                   <span class="icon-bar"></span>
                 </button>
                 <div class="nav-collapse collapse">
-                  <ul class="nav">
+                  <ul class="nav" style="font-size: 24px;">
                     <li>
                       <a href="#">
-                        Menu Item
+                        IceWolf
                         <span class="navbar-unread">1</span>
                       </a>
                     </li>
-                    <li class="active">
-                      <a href="#">
-                        Messages
-                        <span class="navbar-unread">1</span>
-                      </a>
-                      <ul>
-                        <li><a href="#">Element One</a></li>
-                        <li>
-                          <a href="#">Sub menu</a>
-                          <ul>
-                            <li><a href="#">Element One</a></li>
-                            <li><a href="#">Element Two</a></li>
-                            <li><a href="#">Element Three</a></li>
-                          </ul> <!-- /Sub menu -->
-                        </li>
-                        <li><a href="#">Element Three</a></li>
-                      </ul> <!-- /Sub menu -->
+                    <li>
+                    	<a href="#" id="addBookmarkBtn"><span class="fui-new-16"></span></a>
+				        <div id="addBookmarkPopup" class="span7" style="margin-left: -5px; top: 53px; position:absolute; z-index: 2000;">
+					        <div class="share mrl">
+					        	<div style="padding: 10px; font-size: 14px;">
+					        		<input type="text" id="urlbox" placeholder="URL" style="width: 98%;" /><br />
+        							<textarea id="commentbox" placeholder="Comments" style="width: 98%; resize: none"></textarea><br />
+        							<input name="bookmarkTagsInput" id="bookmarkTagsInput" class="tagsinput" value="tags" style="display: none;">
+					        	</div>
+					            <a href="#" id="submitBtn" class="btn btn-primary btn-block btn-large">Share</a>
+					          </div>
+				        </div>                     	
                     </li>
                     
                     
@@ -43,8 +38,10 @@
           </div>
         </div>
         <div>
-        <input type="text" id="urlbox" placeholder="URL" /><br />
-        <textarea id="commentbox" placeholder="Comments" ></textarea><br />
-        <button id="submitbtn">Go</button>
+       <br />
+       <br />
+       
+       
+       
         </div>
 </div>

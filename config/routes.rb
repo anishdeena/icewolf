@@ -11,6 +11,7 @@ Icewolf::Application.routes.draw do
   match "friends" => "friend#getAllFBFriends", via: :get
   
   match "bookmark" => "bookmark#saveBookmark", via: :post
+  match "bookmarks/:id" => "bookmark#getBookmarksByUser", via: :get
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

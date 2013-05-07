@@ -1,11 +1,19 @@
 class BookmarkController < ApplicationController
   
-  def getMyBookmarks
+  def getBookmarks
     
   end
   
-  def getBookmarks
-    
+  def getBookmarksByUser
+    credential_id = params[:id]
+    bookmarks = Bookmark.getBookmarksByUser(credential_id)
+    respond_to do |format|
+      if(bookmarks)
+        format.json {render json: bookmarks, status: :created}
+      else
+        format.json {render json: :no_content, status: :unprocessable_entity}
+      end    
+    end    
   end
   
   def getBookmark

@@ -59,4 +59,10 @@ class Bookmark < ActiveRecord::Base
       end
     end
   end
+  
+  def self.getBookmarksByUser(credential_id)
+    bookmarks = self.includes(:credential).includes(:article).joins(:credential).joins(:article).where(:credential_id => credential_id)
+    logger.info bookmarks.inspect
+    return bookmarks
+  end
 end

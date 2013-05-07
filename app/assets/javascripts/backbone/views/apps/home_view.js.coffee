@@ -4,14 +4,16 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
   template: JST["backbone/templates/apps/home"]
   
   events:
-    "click #submitBtn" : "saveBookmark"
+    "click #submitBtn"      : "saveBookmark"
     "click #addBookmarkBtn" : "toggleBookmarkPopup"
+    "click #myBookmarksBtn" : "getMyBookmarks"
   
   constructor: (options) ->
     super(options)
     @session = new Icewolf.Models.Session()
     @user = new Icewolf.Models.User()
     @bookmark = new Icewolf.Models.Bookmark()
+    @bookmark_collection = new Icewolf.Collections.BookmarksCollection()
     @cookie = new Cookie()
     @errors = new Errors()
     
@@ -23,6 +25,17 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
       error: () =>
         alert('Bookmark Save Error!')
     )
+    
+  getMyBookmarks: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    @bookmark_collection.fetch(
+      url: '/bookmarks/' + @user.attributes.credential_id
+      success: (model, resp) =>
+        console.log(JSON.stringify(@bookmark_collection))
+      error: () =>
+        alert('Error fetching my bookmarks!')
+    )
   
   toggleBookmarkPopup: (e) ->
     e.stopPropagation()
@@ -32,7 +45,7 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
   render: ->
     @user.fetch(
       success: (model, resp) =>
-        $(@el).html(@template())
+        $(@el).html(@template(user: this.user))
         $("#bookmarkTagsInput", @el).tagsInput()
         $('#addBookmarkPopup', @el).hide()
         console.log(model)

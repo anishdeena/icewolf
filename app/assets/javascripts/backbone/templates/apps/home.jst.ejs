@@ -11,7 +11,7 @@
                 <div class="nav-collapse collapse">
                   <ul class="nav" style="font-size: 24px;">
                     <li>
-                      <a href="#">
+                      <a href="#" style="color: #1ABC9C;">
                         IceWolf
                         <span class="navbar-unread">1</span>
                       </a>
@@ -21,16 +21,28 @@
 				        <div id="addBookmarkPopup" class="span7" style="margin-left: -5px; top: 53px; position:absolute; z-index: 2000;">
 					        <div class="share mrl">
 					        	<div style="padding: 10px; font-size: 14px;">
-					        		<input type="text" id="urlbox" placeholder="URL" style="width: 98%;" /><br />
-        							<textarea id="commentbox" placeholder="Comments" style="width: 98%; resize: none"></textarea><br />
+					        		<input type="text" id="urlbox" placeholder="URL" style="width: 97%;" /><br />
+        							<textarea id="commentbox" placeholder="Comments" style="width: 97%; resize: none"></textarea><br />
         							<input name="bookmarkTagsInput" id="bookmarkTagsInput" class="tagsinput" value="tags" style="display: none;">
 					        	</div>
 					            <a href="#" id="submitBtn" class="btn btn-primary btn-block btn-large">Share</a>
 					          </div>
 				        </div>                     	
+                    </li>                   
+                  </ul>
+                  <ul class="nav" style="float: right; font-size: 16px;">
+                    <li>
+                      <a id="myBookmarksBtn" href="#">
+                        My Bookmarks
+                        <span class="navbar-unread">1</span>
+                      </a>
+                    </li>  
+                    <li>
+                    	<a href="#">
+                    		<img style="height: 25px; width: 25px;" src="<%= user.attributes.avatar_url %>" />
+                    		<span class="fui-settings-16" style="top: 30px; right: 7px; position: absolute;"></span>
+						</a>
                     </li>
-                    
-                    
                   </ul>
                 </div><!--/.nav-collapse -->
               </div>

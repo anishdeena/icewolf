@@ -2,6 +2,7 @@ Icewolf.Views.Apps ||= {}
 
 class Icewolf.Views.Apps.HomeView extends Backbone.View
   template: JST["backbone/templates/apps/home"]
+  template_bookmark: JST["backbone/templates/apps/bookmark"]
   
   events:
     "click #submitBtn"      : "saveBookmark"
@@ -32,7 +33,11 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
     @bookmark_collection.fetch(
       url: '/bookmarks/' + @user.attributes.credential_id
       success: (model, resp) =>
+        console.log('hi')
         console.log(JSON.stringify(@bookmark_collection))
+        @bookmark_collection.models.forEach((bookmark)=>
+          @$('#mainbox').append(@template_bookmark(bookmark: bookmark.attributes.bookmark, article: bookmark.attributes.article, user: bookmark.attributes.user))
+        )
       error: () =>
         alert('Error fetching my bookmarks!')
     )

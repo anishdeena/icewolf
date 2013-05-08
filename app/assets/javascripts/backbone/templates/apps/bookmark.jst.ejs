@@ -1,9 +1,14 @@
-<div class="span8" style="background-color: #34495e; padding: 18px 42px 17px 25px;">
+<div class="span8" style="background-color: #34495e; padding: 18px 42px 17px 25px; margin-bottom: 10px;">
 	<div style="width: 140px; margin-left: -10px; margin-right: 10px; float: left;">
 		<img src="<%= article.image_url %>" />
 	</div>
 	<div style="float: left;">
-		<h4 style="color: #ECF0F1;"><%= article.title %></h4>
-		<span style="color: #6285a8; text-transform: capitalize;"><%= bookmark.comment %></span>
+		<h4 style="color: #ECF0F1; margin-bottom: 8px;"><%= article.title %></h4>
+		<span style="font-size: 16px; color: #6285a8; text-transform: capitalize;"><%= bookmark.comment %></span>
+		<div style="font-size: 14px;color: #ECF0F1;margin-top: 10px;">
+			<span style="color: #E74C3C;" class="fui-heart-16"></span>&nbsp;<%= article_stats.count_bookmark %>
+			&nbsp;&nbsp;&nbsp;
+			<span style="color: #F39C12;" class="fui-eye-16"></span>&nbsp;<%= article_stats.count_view %>
+		</div>
 	</div>
 </div>

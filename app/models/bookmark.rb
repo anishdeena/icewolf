@@ -65,7 +65,8 @@ class Bookmark < ActiveRecord::Base
     bookmarks = self.includes(:credential).includes(:article).joins(:credential).joins(:article).where(:credential_id => credential_id)
     bookmarks.each do |bookmark|
       user = User.find_by_credential_id(bookmark.credential.id)
-      bookmark_collection.push({ bookmark: bookmark, article: bookmark.article, user: user })
+      article_stats = ArticleStats.find_by_article_id(bookmark.article.id)
+      bookmark_collection.push({ bookmark: bookmark, article: bookmark.article, article_stats: article_stats, user: user })
     end
     logger.info bookmarks.inspect
     return bookmark_collection

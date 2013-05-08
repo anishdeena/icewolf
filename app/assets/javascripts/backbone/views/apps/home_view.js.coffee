@@ -19,6 +19,8 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
     @errors = new Errors()
     
   saveBookmark: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
     @bookmark.save({url: @$('#urlbox').val(), comment: @$('#commentbox').val()}
       success: (model, resp) =>
         console.log(JSON.stringify(@bookmark))
@@ -36,7 +38,7 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
         console.log('hi')
         console.log(JSON.stringify(@bookmark_collection))
         @bookmark_collection.models.forEach((bookmark)=>
-          @$('#mainbox').append(@template_bookmark(bookmark: bookmark.attributes.bookmark, article: bookmark.attributes.article, user: bookmark.attributes.user))
+          @$('#mainbox').append(@template_bookmark(bookmark: bookmark.attributes.bookmark, article: bookmark.attributes.article, article_stats: bookmark.attributes.article_stats, user: bookmark.attributes.user))
         )
       error: () =>
         alert('Error fetching my bookmarks!')

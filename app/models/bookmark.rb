@@ -71,4 +71,19 @@ class Bookmark < ActiveRecord::Base
     logger.info bookmarks.inspect
     return bookmark_collection
   end
+  
+  def self.getBookmarks(offset)
+    limit = 10
+    data = []
+    bookmark_collection = []
+    bookmarks = self.includes(:credential).includes(:article).joins(:credential).joins(:article).limit(limit).offset(offset)
+    offset = offset + bookmarks.count
+    bookmarks.each do |bookmark|
+      user = User.find_by_credential_id(bookmark.credential.id)
+      article_stats = ArticleStats.find_by_article_id(bookmark.article.id)
+      bookmark_collection.push({ bookmark: bookmark, article: bookmark.article, article_stats: article_stats, user: user })
+    end
+    data.push({ bookmark_collection: bookmark_collection, offset: offset })
+    return data
+  end
 end

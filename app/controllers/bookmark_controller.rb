@@ -1,7 +1,16 @@
 class BookmarkController < ApplicationController
   
   def getBookmarks
-    
+    offset = params[:offset]
+    offset = offset.to_i
+    bookmarks = Bookmark.getBookmarks(offset)
+    respond_to do |format|
+      if(bookmarks)
+        format.json {render json: bookmarks, status: :created}
+      else
+        format.json {render json: :no_content, status: :unprocessable_entity}
+      end    
+    end      
   end
   
   def getBookmarksByUser

@@ -25,6 +25,7 @@ class Icewolf.Views.Apps.SplashView extends Backbone.View
             #cancelled
             #alert("cancelled!")
             msg = 'You have cancelled Facebook Login. Kindly login to enter!'
+      scope: 'email'
     )
     
   fbconnect_test_stub: () ->

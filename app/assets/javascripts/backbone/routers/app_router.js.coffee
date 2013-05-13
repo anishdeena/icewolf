@@ -21,18 +21,18 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
 
   home: ->
     if $('#mainPane').length == 0
-      $("#base").html('<div id="topBar"></div><div id="mainPane"></div>')
+      $("#base").html('<div id="topBar"></div><div id="mainPane" style="margin-left: 10px;"></div>')
       @renderTopBar()
-    $("#mainPane").fadeOut()
+    $("#mainPane").hide()
     @view = new Icewolf.Views.Apps.HomeView()
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()
     
   bookmarks: (id) ->
     if $('#mainPane').length == 0
-      $("#base").html('<div id="topBar"></div><div id="mainPane"></div>')
+      $("#base").html('<div id="topBar"></div><div id="mainPane" style="margin-left: 10px;"></div>')
       @renderTopBar()
-    $("#mainPane").fadeOut()
+    $("#mainPane").hide()
     @view = new Icewolf.Views.Apps.BookmarkView(id: id)
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()

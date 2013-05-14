@@ -19,10 +19,17 @@
                     	<a href="#" id="addBookmarkBtn"><span class="fui-new-16"></span></a>
 				        <div id="addBookmarkPopup" class="span7" style="margin-left: -5px; top: 53px; position:absolute; z-index: 2000;">
 					        <div class="share mrl">
-					        	<div style="padding: 10px; font-size: 14px;">
+					        	<div id="popupContainer" style="padding: 10px; font-size: 14px;">
+					        	  <div id="popupItemsContainer">
 					        		<input type="text" id="urlbox" placeholder="URL" style="width: 97%;" /><br />
         							<textarea id="commentbox" placeholder="Comments" style="width: 97%; resize: none"></textarea><br />
         							<input name="bookmarkTagsInput" id="bookmarkTagsInput" class="tagsinput" value="tags" style="display: none;">
+					        	  </div>
+					        	  <div id="popupLoaderContainer" style="margin-top: 70px; margin-bottom: 50px; display: none;">
+					        	  	<center>
+					        	  		<img src="/images/mischellaneous/loader_medium.gif" />
+					        	  	</center>
+					        	  </div>
 					        	</div>
 					            <a href="#" id="submitBtn" class="btn btn-primary btn-block btn-large">Share</a>
 					          </div>

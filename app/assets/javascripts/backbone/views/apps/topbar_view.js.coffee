@@ -30,7 +30,7 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
     e.preventDefault()
     @$('#popupItemsContainer').hide()
     @$('#popupLoaderContainer').show()
-    @bookmark.save({url: @$('#urlbox').val(), comment: @$('#commentbox').val()}
+    @bookmark.save({url: @$('#urlbox').val(), comment: @$('#commentbox').val(), tags: @$('#bookmarkTagsInput').val()}
       success: (model, resp) =>
         @$('#popupLoaderContainer').hide()
         @$('#popupItemsContainer').show()

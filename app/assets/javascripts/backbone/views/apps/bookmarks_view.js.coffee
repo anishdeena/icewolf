@@ -4,8 +4,8 @@ class Icewolf.Views.Apps.BookmarkView extends Backbone.View
   template_bookmark: JST["backbone/templates/apps/bookmark"]
   offset = 0
   
-  #events:
-    #"click #submitBtn"      : "saveBookmark"
+  events:
+    "click a.userlink"  : "redirectToUser"
   
   constructor: (options) ->
     super(options)
@@ -16,6 +16,12 @@ class Icewolf.Views.Apps.BookmarkView extends Backbone.View
     @bookmark_collection = new Icewolf.Collections.BookmarksCollection()
     @cookie = new Cookie()
     @errors = new Errors()
+    
+  redirectToUser: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    id = $(e.currentTarget).attr('uid')
+    router.navigate("bookmarks/" + id,{trigger : true}) 
     
   getBookmarks: () ->
     $('#mainbox', @el).html('')

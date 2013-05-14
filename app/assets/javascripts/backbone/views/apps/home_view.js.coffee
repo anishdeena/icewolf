@@ -6,6 +6,9 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
   
   offset = 0
   
+  events:
+    "click a.userlink"  : "redirectToUser"
+  
   constructor: (options) ->
     super(options)
     @session = new Icewolf.Models.Session()
@@ -14,6 +17,12 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
     @bookmark_collection = new Icewolf.Collections.BookmarksCollection()
     @cookie = new Cookie()
     @errors = new Errors()
+  
+  redirectToUser: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    id = $(e.currentTarget).attr('uid')
+    router.navigate("bookmarks/" + id,{trigger : true}) 
 
   render: ->
     @user.fetch(

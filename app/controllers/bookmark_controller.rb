@@ -1,9 +1,28 @@
 class BookmarkController < ApplicationController
   
   def getBookmarks
-    offset = params[:offset]
-    offset = offset.to_i
-    bookmarks = Bookmark.getBookmarks(offset)
+    options = params['options']
+    logger.info 'OPTIONS ----------------------'
+    logger.info params.inspect
+    if !options
+      options = Hash.new
+    end
+    offset = nil
+    if options.has_key?('offset')
+      offset = options['offset']
+    end
+    
+    credential_id = nil
+    if options.has_key?('credential_id')
+      credential_id = options['credential_id']
+    end
+    
+    search_term = nil
+    if options.has_key?('search_term')
+      search_term = options['search_term']
+    end
+        
+    bookmarks = Bookmark.getBookmarks(search_term, credential_id, offset)
     respond_to do |format|
       if(bookmarks)
         format.json {render json: bookmarks, status: :created}

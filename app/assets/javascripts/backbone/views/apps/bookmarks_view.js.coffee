@@ -1,7 +1,8 @@
 Icewolf.Views.Apps ||= {}
 
 class Icewolf.Views.Apps.BookmarkView extends Backbone.View
-  template_bookmark: JST["backbone/templates/apps/bookmark"]
+  template          : JST["backbone/templates/apps/profile_home"]
+  template_bookmark : JST["backbone/templates/apps/bookmark"]
   offset = 0
   
   events:
@@ -37,6 +38,12 @@ class Icewolf.Views.Apps.BookmarkView extends Backbone.View
     )
 
   render: ->
-    $(@el).html('<div id="leftpane" style="margin-right: 10px;overflow: hidden;float: left;background-color: #34495e;color: white;"><div class="demo-browser-side"><div><img style="" src="http://graph.facebook.com/100004133943578/picture?width=111&amp;height=100"></div><div class="demo-browser-action"><a class="btn btn-danger btn-large btn-block" href="http://twitter.com/monstercritic" target="_blank">Follow</a></div><h5>@monstercritic</h5><h6>Tourist. Designer. NYC<a href="http://shmidt.in" target="_blank">shmidt.in</a></h6></div></div><div id="mainbox" style="overflow: hidden;"></div>')
-    @getBookmarks()
+    @user.fetch(
+      url: '/user/' + @id
+      success: (model, resp) =>
+        $(@el).html(@template(user: this.user))
+        @getBookmarks()
+      error: =>
+    )
+
     return this

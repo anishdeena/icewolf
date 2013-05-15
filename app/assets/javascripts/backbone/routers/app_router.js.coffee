@@ -2,10 +2,11 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
   initialize: (options) ->
 
   routes:
-    ".*"      : "splash"
-    "follow"  : "follow"
-    "home"    : "home"
-    "bookmarks/:id" : "bookmarks"
+    ".*"                  : "splash"
+    "follow"              : "follow"
+    "home"                : "home"
+    "bookmarks/:id"       : "bookmarks"
+    "search/:search_term" : "search"
   
   renderTopBar: ->
     @view = new Icewolf.Views.Apps.TopBarView()
@@ -38,4 +39,14 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
     @view = new Icewolf.Views.Apps.BookmarkView(id: id)
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()
+    
+  search: (search_term) ->
+    if $('#mainPane').length == 0
+      $("#base").html('<div id="topBar"></div><div id="mainPane" style="margin-left: 10px;"></div>')
+      @renderTopBar()
+    $("#mainPane").hide()
+    #$('#mainPane').html('<div style="margin-top: 100px;"><center><img src="/images/mischellaneous/loader_medium.gif" /></center></div>')
+    @view = new Icewolf.Views.Apps.HomeView(search_term: search_term)
+    $("#mainPane").html(@view.render().el)
+    $("#mainPane").fadeIn()    
 

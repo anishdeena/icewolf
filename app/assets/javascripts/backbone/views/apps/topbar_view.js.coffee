@@ -10,6 +10,7 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
     "click #addBookmarkBtn" : "toggleBookmarkPopup"
     "click #myBookmarksBtn" : "getMyBookmarks"
     "click #logoBtn"        : "gotoHome"
+    "keyup #mainSearchBox"  : "searchBookmarks"
   
   constructor: (options) ->
     super(options)
@@ -20,6 +21,10 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
     @cookie = new Cookie()
     @errors = new Errors()
     
+  searchBookmarks: (e) ->
+    if ((e.keyCode || e.which) == 13) #Enter Key
+      router.navigate("search/" + @$('#mainSearchBox').val(), {trigger : true})
+    
   gotoHome: (e) ->
     e.stopPropagation()
     e.preventDefault()
@@ -29,17 +34,22 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
     e.stopPropagation()
     e.preventDefault()
     @$('#popupItemsContainer').hide()
-    @$('#popupLoaderContainer').show()
+    @$('#popupLoaderContainer').fadeIn()
     @bookmark.save({url: @$('#urlbox').val(), comment: @$('#commentbox').val(), tags: @$('#bookmarkTagsInput').val()}
       success: (model, resp) =>
         @$('#popupLoaderContainer').hide()
-        @$('#popupItemsContainer').show()
+        @$('#popupItemsContainer').fadeIn()
         @$('#urlbox').val('')
         @$('#commentbox').val('')
         #console.log(JSON.stringify(@bookmark))
         #alert('Bookmark Saved!')
         @$('#addBookmarkPopup').hide()
       error: () =>
+        @$('#popupLoaderContainer').hide()
+        @$('#popupItemsContainer').show()
+        @$('#urlbox').val('')
+        @$('#commentbox').val('')
+        @$('#addBookmarkPopup').hide()
         alert('Bookmark Save Error!')
     )
     

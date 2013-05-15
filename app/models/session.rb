@@ -45,8 +45,8 @@ class Session < ActiveRecord::Base
     user_session.save!
   end
   
-  def self.expireSession(fp_auth_token)
-    user_session = UserSession.find_by_auth_token(fp_auth_token)
+  def self.expireSession(auth_token)
+    user_session = Session.find_by_auth_token(auth_token)
     expireSessionBySession(user_session)
   end
   

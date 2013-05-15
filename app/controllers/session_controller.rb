@@ -19,8 +19,8 @@ class SessionController < ApplicationController
   end
 
   def signOut
-    fp_auth_token = getAuthToken()
-    user = UserSession.expireSession(fp_auth_token)
+    auth_token = getAuthToken()
+    user = Session.expireSession(auth_token)
     respond_to do |format|
       if user
         format.json { render json: user, status: :created }

@@ -11,6 +11,7 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
     "click #myBookmarksBtn" : "getMyBookmarks"
     "click #logoBtn"        : "gotoHome"
     "keyup #mainSearchBox"  : "searchBookmarks"
+    "click #signOut"        : "signOut"
   
   constructor: (options) ->
     super(options)
@@ -61,7 +62,21 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
   toggleBookmarkPopup: (e) ->
     e.stopPropagation()
     e.preventDefault()
-    @$('#addBookmarkPopup').toggle()  
+    @$('#addBookmarkPopup').toggle()
+    
+  signOut: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    @isAccountMenuVisible = 0
+    @session.fetch(
+      success:() =>
+        @cookie.expire(appConstants.COOKIE_NAME)
+        FB.logout(
+          (response) ->
+            console.log('Signed out!')
+        )
+        router.navigate("#",{trigger: true})
+    )  
 
   render: ->
     @user.fetch(

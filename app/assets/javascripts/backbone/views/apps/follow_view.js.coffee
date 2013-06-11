@@ -50,12 +50,6 @@ class Icewolf.Views.Apps.FollowView extends Backbone.View
     console.log(@following)
 
   render: ->
-    @user.fetch(
-      success: (model, resp) =>
-        $(@el).html(@template())
-        @friends.fetch()
-        console.log(model)
-      error: =>
-    )
+    @friends.fetch()
     $(@el).html(@template())
     return this

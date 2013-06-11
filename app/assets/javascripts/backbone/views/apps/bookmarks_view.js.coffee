@@ -1,7 +1,7 @@
 Icewolf.Views.Apps ||= {}
 
 class Icewolf.Views.Apps.BookmarkView extends Backbone.View
-  template          : JST["backbone/templates/apps/profile_home"]
+  template          : JST["backbone/templates/apps/bookmark_container"]
   template_bookmark : JST["backbone/templates/apps/bookmark"]
   offset = 0
   
@@ -10,14 +10,28 @@ class Icewolf.Views.Apps.BookmarkView extends Backbone.View
   
   constructor: (options) ->
     super(options)
-    @id = options.id
+    @options_hash = {}
+    @params_hash = {'options': @options_hash}
+    if options
+      if options.hasOwnProperty('id')
+        @id = options.id
+      if options.hasOwnProperty('search_term')
+        @search_term = options.search_term  
     @session = new Icewolf.Models.Session()
     @user = new Icewolf.Models.User()
     @bookmark = new Icewolf.Models.Bookmark()
     @bookmark_collection = new Icewolf.Collections.BookmarksCollection()
     @cookie = new Cookie()
     @errors = new Errors()
+    @initializeOptions()
     
+  initializeOptions: () ->
+    @options_hash['offset'] = @offset
+    if @search_term
+      @options_hash['search_term'] = @search_term
+    if @id
+      @options_hash['credential_id'] = @id
+      
   redirectToUser: (e) ->
     e.stopPropagation()
     e.preventDefault()
@@ -25,25 +39,19 @@ class Icewolf.Views.Apps.BookmarkView extends Backbone.View
     router.navigate("bookmarks/" + id,{trigger : true}) 
     
   getBookmarks: () ->
-    $('#mainbox', @el).html('')
     @bookmark_collection.fetch(
-      url: '/bookmarks/' + @id
+      data: @params_hash
+      url : 'bookmarks'
       success: (model, resp) =>
-        #console.log(JSON.stringify(@bookmark_collection))
-        @bookmark_collection.models.forEach((bookmark)=>
-          $('#mainbox', @el).append(@template_bookmark(bookmark: bookmark.attributes.bookmark, article: bookmark.attributes.article, article_stats: bookmark.attributes.article_stats, user: bookmark.attributes.user))
+        @offset = @bookmark_collection.models[0].attributes.offset
+        @bookmark_collection.models[0].attributes.bookmark_collection.forEach((bookmark) =>
+          $('.bookmark_container', @el).append(@template_bookmark(bookmark: bookmark.bookmark, article: bookmark.article, article_stats: bookmark.article_stats, user: bookmark.user))
         )
       error: () =>
         alert('Error fetching my bookmarks!')
     )
 
   render: ->
-    @user.fetch(
-      url: '/user/' + @id
-      success: (model, resp) =>
-        $(@el).html(@template(user: this.user))
-        @getBookmarks()
-      error: =>
-    )
-
+    $(@el).html(@template())
+    @getBookmarks()
     return this

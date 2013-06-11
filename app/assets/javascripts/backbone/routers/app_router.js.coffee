@@ -25,7 +25,6 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
       $("#base").html('<div id="topBar"></div><div id="mainPane" style="margin-left: 10px;"></div>')
       @renderTopBar()
     $("#mainPane").hide()
-    #$('#mainPane').html('<div style="margin-top: 100px;"><center><img src="/images/mischellaneous/loader_medium.gif" /></center></div>')
     @view = new Icewolf.Views.Apps.HomeView()
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()
@@ -35,8 +34,7 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
       $("#base").html('<div id="topBar"></div><div id="mainPane" style="margin-left: 10px;"></div>')
       @renderTopBar()
     $("#mainPane").hide()
-    #$('#mainPane').html('<div style="margin-top: 100px;"><center><img src="/images/mischellaneous/loader_medium.gif" /></center></div>')
-    @view = new Icewolf.Views.Apps.BookmarkView(id: id)
+    @view = new Icewolf.Views.Apps.ProfileView(id: id)
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()
     
@@ -46,7 +44,7 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
       @renderTopBar()
     $("#mainPane").hide()
     #$('#mainPane').html('<div style="margin-top: 100px;"><center><img src="/images/mischellaneous/loader_medium.gif" /></center></div>')
-    @view = new Icewolf.Views.Apps.HomeView(search_term: search_term)
+    @view = new Icewolf.Views.Apps.SearchView(search_term: search_term)
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()    
 

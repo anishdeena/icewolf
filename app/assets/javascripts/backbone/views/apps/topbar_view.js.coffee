@@ -42,9 +42,8 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
         @$('#popupItemsContainer').fadeIn()
         @$('#urlbox').val('')
         @$('#commentbox').val('')
-        #console.log(JSON.stringify(@bookmark))
-        #alert('Bookmark Saved!')
         @$('#addBookmarkPopup').hide()
+        @bookmark.clear()
       error: () =>
         @$('#popupLoaderContainer').hide()
         @$('#popupItemsContainer').show()

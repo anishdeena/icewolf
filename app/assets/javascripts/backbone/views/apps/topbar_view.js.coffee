@@ -9,6 +9,7 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
     "click #submitBtn"      : "saveBookmark"
     "click #addBookmarkBtn" : "toggleBookmarkPopup"
     "click #myBookmarksBtn" : "getMyBookmarks"
+    "click #myGroupsBtn"    : "getMyGroups"
     "click #logoBtn"        : "gotoHome"
     "keyup #mainSearchBox"  : "searchBookmarks"
     "click #signOut"        : "signOut"
@@ -56,7 +57,12 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
   getMyBookmarks: (e) ->
     e.stopPropagation()
     e.preventDefault()
-    router.navigate("bookmarks/" + appConstants.CURRENTUSER.attributes.credential_id,{trigger : true}) 
+    router.navigate("bookmarks/" + appConstants.CURRENTUSER.attributes.credential_id,{trigger : true})
+    
+  getMyGroups: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    router.navigate("groups/" + appConstants.CURRENTUSER.attributes.credential_id,{trigger : true}) 
   
   toggleBookmarkPopup: (e) ->
     e.stopPropagation()
@@ -83,6 +89,7 @@ class Icewolf.Views.Apps.TopBarView extends Backbone.View
         appConstants.CURRENTUSER = this.user
         $(@el).html(@template(user: this.user))
         $("#bookmarkTagsInput", @el).tagsInput()
+        $("#groupTagsInput", @el).tagsInput()
         $('#addBookmarkPopup', @el).hide()
         console.log(model)
       error: =>

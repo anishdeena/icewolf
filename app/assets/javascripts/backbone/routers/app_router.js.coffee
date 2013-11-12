@@ -6,6 +6,7 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
     "follow"              : "follow"
     "home"                : "home"
     "bookmarks/:id"       : "bookmarks"
+    "groups/:id"          : "groups"
     "search/:search_term" : "search"
   
   renderTopBar: ->
@@ -35,6 +36,15 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
       @renderTopBar()
     $("#mainPane").hide()
     @view = new Icewolf.Views.Apps.ProfileView(id: id)
+    $("#mainPane").html(@view.render().el)
+    $("#mainPane").fadeIn()
+    
+  groups: (id) ->
+    if $('#mainPane').length == 0
+      $("#base").html('<div id="topBar"></div><div id="mainPane" style="margin-left: 10px;"></div>')
+      @renderTopBar()
+    $("#mainPane").hide()
+    @view = new Icewolf.Views.Apps.ProfileView(id: id, group:true)
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()
     

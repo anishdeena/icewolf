@@ -34,6 +34,7 @@ class Icewolf.Views.Apps.HomeView extends Backbone.View
   render: ->
     $(@el).html('<div id="mainbox"></div>')
     $("#bookmarkTagsInput", @el).tagsInput()
+    $("#groupTagsInput", @el).tagsInput()
     $('#addBookmarkPopup', @el).hide()
     @$('#mainbox').html(@bookmark_view.render().el)
 

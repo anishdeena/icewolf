@@ -11,9 +11,13 @@ class Icewolf.Views.Apps.ProfileView extends Backbone.View
   constructor: (options) ->
     super(options)
     @id = options.id
+    @is_group = false
+    if options.hasOwnProperty("group")
+      @is_group = true
     @session = new Icewolf.Models.Session()
     @user = new Icewolf.Models.User()
-    @bookmark_view = new Icewolf.Views.Apps.BookmarkView(id: @id)
+    if @is_group == false
+      @bookmark_view = new Icewolf.Views.Apps.BookmarkView(id: @id)
     @cookie = new Cookie()
     @errors = new Errors()
     

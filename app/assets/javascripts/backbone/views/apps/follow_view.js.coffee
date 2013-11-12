@@ -7,6 +7,7 @@ class Icewolf.Views.Apps.FollowView extends Backbone.View
   events:
     "keyup #friendSearchBox" : "searchFriends"
     "click button.followBtn" : "toggleFriendSelection"
+    "click #inviteBtn"       : "sendFBInvite"
 
   constructor: (options) ->
     super(options)
@@ -38,17 +39,25 @@ class Icewolf.Views.Apps.FollowView extends Backbone.View
 
   toggleFriendSelection: (e) ->
     if $(e.currentTarget).hasClass('btn-success')
-      $(e.currentTarget).html('Follow')
+      $(e.currentTarget).html('Select')
       $(e.currentTarget).removeClass('btn-success')
       @following = $.grep(@following, (value) ->
         value != $(e.currentTarget).attr('fbuid')
       )
     else
-      $(e.currentTarget).html('Unfollow')
+      $(e.currentTarget).html('Deselect')
       $(e.currentTarget).addClass('btn-success')
       @following.push($(e.currentTarget).attr('fbuid'))
     console.log(@following)
-
+    
+  sendFBInvite: (e) ->
+    FB.ui({method: "apprequests",message: "Try out Icewolf, a new way to collaboratively share and organize bookmarks!", to: @following}, @fbInviteCallback)    
+  
+  fbInviteCallback: (response) =>
+    if response
+      that = @
+      Console.log("app request sent!")
+      
   render: ->
     @friends.fetch()
     $(@el).html(@template())

@@ -53,7 +53,7 @@ class Icewolf.Routers.AppsRouter extends Backbone.Router
       $("#base").html('<div id="topBar"></div><div id="mainPane" style="margin-left: 10px;"></div>')
       @renderTopBar()
     $("#mainPane").hide()
-    #$('#mainPane').html('<div style="margin-top: 100px;"><center><img src="/images/mischellaneous/loader_medium.gif" /></center></div>')
+    #$('#mainPane').html('<div style="margin-top: 100px;"><center><img src="/assets/mischellaneous/loader_medium.gif" /></center></div>')
     @view = new Icewolf.Views.Apps.SearchView(search_term: search_term)
     $("#mainPane").html(@view.render().el)
     $("#mainPane").fadeIn()    
